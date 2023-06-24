@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <h1 class="text-[#43d9ad] font-extrabold " ></h1>
+    <h1 class="text-[#43d9ad] font-extrabold " >Notes</h1>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full md:w-3/5 text-[#607b96] m-auto">
+  <div class="w-full mt-8 md:w-3/5 text-[#607b96] m-auto">
     <div v-if="notes.length > 0" class="flex flex-col gap-2">
       <div
         @click="showDescription(index)"
@@ -35,6 +35,7 @@
       />
     </div>
 
+    // form for adding new note. 
     <form
       v-show="showForm"
       class="flex flex-col gap-3"
@@ -44,8 +45,9 @@
       <div class="flex flex-col">
         <label for="">Title</label>
         <input
-          class="border border-[#607b96] p-2 bg-[#011221] rounded-md focus:outline-[#43d9ad]"
+          class="border border-[#607b96] focus:ring-transparent before:border-none focus:ring-0 p-2 bg-[#011221] rounded-md focus:outline-[#43d9ad]"
           v-model="title"
+          required
           type="text"
           placeholder="Title"
         />
@@ -53,20 +55,21 @@
       <div class="flex flex-col">
         <label for="">Description</label>
         <textarea
-          class="border p-2 bg-[#011221] rounded-md focus:outline-[#43d9ad] border-[#607b96]"
+          class="border p-2 focus:ring-0 bg-[#011221] rounded-md focus:outline-[#43d9ad] border-[#607b96]"
           v-model="description"
           @input="handleWordCount"
+          required
           type="text"
           placeholder="Description"
         />
         <span v-show="wordCount">{{ wordCount }} words </span>
       </div>
 
-      <button class="bg-black w-full rounded-md md:w-1/2 px-3 py-2 text-white">
+      <button class="bg-[#1C2B3A] w-full rounded-md md:w-1/2 px-3 py-2 text-white">
         {{editingIndex === null ? 'Create' : 'Update' }}
       </button>
     </form>
-
+// modal to confirm delete notes.
     <div
       v-show="showDeleteModal"
       class="fixed bg-black h-full flex items-center justify-center w-full inset-0 bg-opacity-40"
@@ -95,7 +98,6 @@
 </template>
 
 <script setup>
-import addIcon from "../assets/add-notes.svg";
 import closeNote from "../assets/icons8-close.svg";
 import deleteIcon from "../assets/icons8-delete.svg";
 import editIcon from "../assets/icons8-edit.svg";
@@ -114,6 +116,8 @@ const noteItem = ref({
   title: title.value,
   description: description.value,
 });
+const notes =  ref([]);
+
 watchEffect(() => {
   noteItem.value = {
     title: title.value,
@@ -121,7 +125,6 @@ watchEffect(() => {
   };
 });
 
-const notes =  ref([]);
 
 onMounted(()=>{
    const storedNotes = localStorage.getItem('notes')
@@ -131,8 +134,9 @@ onMounted(()=>{
 })
 function handleSubmit() {
   console.log(noteItem.value);
+
   if (editingIndex.value !== null  ) {
-   notes.value.splice(editingIndex.value, 1, noteItem.value);
+   notes.value.splice(0, 1, noteItem.value);
     editingIndex.value = null;
   } 
   else {
@@ -174,6 +178,4 @@ function handleEditNote(index) {
    title.value = note.title
    description.value = note.description
 }
-
-
 </script>
