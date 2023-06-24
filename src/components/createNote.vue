@@ -162,8 +162,10 @@ function deleteNote() {
   let filteredNotes = notes.value.filter(
     (note, index) => index !== deleteItem.value
   );
+  localStorage.setItem('notes',JSON.stringify(filteredNotes))
   setTimeout(() => {
     notes.value = filteredNotes;
+
     showDeleteModal.value = false;
   }, 100);
 }
