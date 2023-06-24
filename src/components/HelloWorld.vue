@@ -1,12 +1,10 @@
-<script setup lang="ts">
-
-defineProps<{ msg: string }>();
+<script >
 
 </script>
 
 <template>
   <div>
-    <h1 class="text-[#43d9ad] font-extrabold " >{{ msg }}</h1>
+    <h1 class="text-[#43d9ad] font-extrabold " ></h1>
   </div>
 </template>
 
