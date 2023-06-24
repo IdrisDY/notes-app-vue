@@ -35,7 +35,7 @@
       />
     </div>
 
-    // form for adding new note. 
+    <!-- // form for adding new note.  -->
     <form
       v-show="showForm"
       class="flex flex-col gap-3"
@@ -69,7 +69,7 @@
         {{editingIndex === null ? 'Create' : 'Update' }}
       </button>
     </form>
-// modal to confirm delete notes.
+<!-- // modal to confirm delete notes. -->
     <div
       v-show="showDeleteModal"
       class="fixed bg-black h-full flex items-center justify-center w-full inset-0 bg-opacity-40"
